@@ -39,3 +39,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# claude code (local IDE settings)
+.claude/
+
+# local data (runtime DB — not part of source)
+/data/requests.json
+
+# OS
+Thumbs.db

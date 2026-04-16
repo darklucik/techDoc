@@ -1,0 +1,32 @@
+{
+  "hero": {
+    "title": "Uy texnikasini ta'mirlash",
+    "subtitle": "Tez. Sifatli. Kafolat bilan.",
+    "description": "Sovutgichlar, kir yuvish mashinalari, televizorlar va boshqa texnikalarni professional ta'mirlash. Usta bir soat ichida yetib keladi."
+  },
+  "services": [
+    { "id": "1", "icon": "Refrigerator", "title": "Sovutgichlar", "description": "Kompressor ta'miri, germetik almashtirish, freon sizishini bartaraf etish" },
+    { "id": "2", "icon": "WashingMachine", "title": "Kir yuvish mashinalari", "description": "Podshipnik almashtirish, TEN ta'miri, tebranish va oqishni bartaraf etish" },
+    { "id": "3", "icon": "Tv", "title": "Televizorlar", "description": "Matritsa ta'miri, boshqaruv platalari almashtirish, yorug'lik muammolari" },
+    { "id": "4", "icon": "Wind", "title": "Konditsionerlar", "description": "Freon quyish, tozalash, kompressor va platalarni ta'mirlash" },
+    { "id": "5", "icon": "Microwave", "title": "Mikroto'lqinli pechlar", "description": "Magnetron almashtirish, transformator ta'miri, tozalash" },
+    { "id": "6", "icon": "Laptop", "title": "Noutbuklar", "description": "Ekran, klaviatura almashtirish, suv tushgandan keyin ta'mirlash" }
+  ],
+  "whyUs": [
+    { "id": "1", "title": "1 soat ichida kelish", "description": "Usta ariza berilgandan so'ng bir soat ichida siz huzuringizga keladi" },
+    { "id": "2", "title": "12 oy kafolat", "description": "Barcha ta'mirlash turlariga yozma kafolat beramiz" },
+    { "id": "3", "title": "Original ehtiyot qismlar", "description": "Faqat sertifikatlangan detallardan foydalanamiz" },
+    { "id": "4", "title": "15 yillik tajriba", "description": "50 000 dan ortiq muvaffaqiyatli ta'mirlash amalga oshirilgan" }
+  ],
+  "reviews": [
+    { "id": "1", "name": "Akbar T.", "text": "Ajoyib xizmat! Usta 40 daqiqa ichida keldi, sovutgichni 2 soatda tuzatdi. 3 oydan beri ishlayapti.", "rating": 5 },
+    { "id": "2", "name": "Nilufar X.", "text": "Kir yuvish mashinasini tez va arzon tuzatishdi. Kafolat berishdi. Xizmatdan juda mamnunman.", "rating": 5 },
+    { "id": "3", "name": "Jasur M.", "text": "Televizor ta'mirdan keyin yaxshi ishlayapti. Muloyim ustalar, toza ishlashadi.", "rating": 4 }
+  ],
+  "contacts": {
+    "phone": "+998 71 200-10-10",
+    "email": "info@techdoc.uz",
+    "address": "Toshkent sh., Chilonzor tumani, 14-kvartal",
+    "hours": "Du-Ya: 8:00 — 22:00"
+  }
+}
