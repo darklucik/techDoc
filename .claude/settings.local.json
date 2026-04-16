@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh api:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir=false --import-alias=\"@/*\" --yes)",
+      "Bash(mkdir -p \"C:/Users/rusta/Documents/techDoc\")",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir=false --import-alias=\"@/*\" --yes --name=techdoc)",
+      "Read(//c/Users/rusta/Documents/**)",
+      "Bash(npx create-next-app@latest techdoc --typescript --tailwind --eslint --app --src-dir=false --import-alias=\"@/*\" --yes)"
+    ]
+  }
+}
