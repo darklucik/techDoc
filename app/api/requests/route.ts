@@ -30,7 +30,8 @@ export async function POST(req: NextRequest) {
       description: description.trim(),
     });
     return NextResponse.json({ success: true, data: newReq }, { status: 201 });
-  } catch {
+  } catch (err) {
+    console.error('[POST /api/requests]', err);
     return NextResponse.json({ error: 'Ошибка сервера' }, { status: 500 });
   }
 }

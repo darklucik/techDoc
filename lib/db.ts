@@ -6,11 +6,14 @@ const REQUESTS_FILE = path.join(process.cwd(), 'data', 'requests.json');
 const CONTENT_FILE = path.join(process.cwd(), 'data', 'content.json');
 
 export function getRequests(): ServiceRequest[] {
+  if (!fs.existsSync(REQUESTS_FILE)) return [];
   const raw = fs.readFileSync(REQUESTS_FILE, 'utf-8');
   return JSON.parse(raw);
 }
 
 export function saveRequest(req: Omit<ServiceRequest, 'id' | 'status' | 'createdAt'>): ServiceRequest {
+  const dir = path.dirname(REQUESTS_FILE);
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
   const requests = getRequests();
   const newReq: ServiceRequest = {
     ...req,
@@ -33,6 +36,9 @@ export function updateRequestStatus(id: string, status: ServiceRequest['status']
 }
 
 export function getContent(): SiteContent {
+  if (!fs.existsSync(CONTENT_FILE)) {
+    throw new Error(`content.json not found at ${CONTENT_FILE}`);
+  }
   const raw = fs.readFileSync(CONTENT_FILE, 'utf-8');
   return JSON.parse(raw);
 }
