@@ -224,7 +224,7 @@ const t = {
       policy:          "Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности",
     },
   },
-} as const;
+};
 
 export default t;
 export type Translations = typeof t.uz;
