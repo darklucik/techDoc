@@ -52,7 +52,7 @@ export default function LoginPage() {
           </div>
           <div>
             <h1 className="text-2xl font-bold text-white">
-              Tech<span className="text-blue-400">Doc</span>
+              Repair<span className="text-blue-400">Master</span>
             </h1>
             <p className="text-slate-500 text-sm mt-1">Панель управления</p>
           </div>

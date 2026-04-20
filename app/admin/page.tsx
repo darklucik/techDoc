@@ -32,7 +32,7 @@ export default async function AdminDashboard() {
       <div>
         <h1 className="text-2xl font-bold text-white">Дашборд</h1>
         <p className="text-slate-500 text-sm mt-1">
-          Добро пожаловать в панель управления TechDoc
+          Добро пожаловать в панель управления RepairMaster
         </p>
       </div>
 

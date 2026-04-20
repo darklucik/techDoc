@@ -45,7 +45,7 @@ export function safeCompare(a: string, b: string): boolean {
 const SESSION_MAX_AGE_MS = 8 * 60 * 60 * 1000; // 8 hours
 
 function getSecret(): string {
-  return process.env.SESSION_SECRET ?? 'techdoc-fallback-secret';
+  return process.env.SESSION_SECRET ?? 'repairmaster-fallback-secret';
 }
 
 function hmac(payload: string): string {

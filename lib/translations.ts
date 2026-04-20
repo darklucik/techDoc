@@ -88,7 +88,7 @@ const t = {
       emailLabel:   "Email",
       addressLabel: "Manzil",
       hoursLabel:   "Ish vaqti",
-      copyright:    "© 2026 TechDoc. Barcha huquqlar himoyalangan.",
+      copyright:    "© 2026 RepairMaster. Barcha huquqlar himoyalangan.",
       adminLink:    "Boshqaruv paneli",
     },
     form: {
@@ -200,7 +200,7 @@ const t = {
       emailLabel:   "Email",
       addressLabel: "Адрес",
       hoursLabel:   "Режим работы",
-      copyright:    "© 2026 TechDoc. Все права защищены.",
+      copyright:    "© 2026 RepairMaster. Все права защищены.",
       adminLink:    "Панель управления",
     },
     form: {

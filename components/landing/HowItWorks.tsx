@@ -25,33 +25,13 @@ function seg(x1: number, y1: number, x2: number, y2: number): string {
 }
 
 /* ────────────────────────────────────────────────────────
-   STEPS DATA
+   STEPS ICONS + COLORS (layout-only, text comes from T)
 ──────────────────────────────────────────────────────── */
-const steps = [
-  {
-    icon:  PhoneCall,
-    title: 'Ariza qoldiring',
-    desc:  "Bizga qo'ng'iroq qiling yoki saytdagi formani to'ldiring — bir daqiqadan kam vaqt oladi",
-    color: 'blue',
-  },
-  {
-    icon:  MapPin,
-    title: 'Usta kelishi',
-    desc:  "Usta qulay vaqtda, aksariyat hollarda murojaat kuni o'zida yetib keladi",
-    color: 'orange',
-  },
-  {
-    icon:  Wrench,
-    title: "Diagnostika va ta'mirlash",
-    desc:  "Uyingizda bepul diagnostika, ehtiyot qismlar mavjud bo'lsa shu kuni ta'mirlash",
-    color: 'blue',
-  },
-  {
-    icon:  CheckCircle,
-    title: 'Kafolat',
-    desc:  "Barcha turdagi ishlarga 12 oygacha yozma kafolat beramiz",
-    color: 'green',
-  },
+const stepsMeta = [
+  { icon: PhoneCall,    color: 'blue'   },
+  { icon: MapPin,       color: 'orange' },
+  { icon: Wrench,       color: 'blue'   },
+  { icon: CheckCircle,  color: 'green'  },
 ] as const;
 
 const colorCls: Record<string, string> = {
@@ -265,10 +245,11 @@ export default function HowItWorks() {
             visible={isInView}
           />
 
-          {steps.map((step, i) => {
-            const Icon    = step.icon;
+          {stepsMeta.map((meta, i) => {
+            const Icon    = meta.icon;
             const iconRef = iconRefs[i];
             const yMV     = yMVs[i];
+            const step    = hw.steps[i];
 
             return (
               <motion.div
@@ -290,7 +271,7 @@ export default function HowItWorks() {
                 {/* Icon — LINE ANCHOR */}
                 <div
                   ref={iconRef}
-                  className={`w-14 h-14 rounded-2xl border ${colorCls[step.color]} flex items-center justify-center mx-auto mb-4 mt-2 transition-transform duration-200 group-hover:scale-110`}
+                  className={`w-14 h-14 rounded-2xl border ${colorCls[meta.color]} flex items-center justify-center mx-auto mb-4 mt-2 transition-transform duration-200 group-hover:scale-110`}
                 >
                   <Icon size={24} />
                 </div>

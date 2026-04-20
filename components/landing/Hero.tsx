@@ -131,7 +131,7 @@ export default function Hero() {
                 <Wrench size={36} className="text-blue-400" />
               </motion.div>
               <div className="text-center">
-                <div className="text-white font-bold text-lg">TechDoc</div>
+                <div className="text-white font-bold text-lg">RepairMaster</div>
                 <div className="text-slate-400 text-sm">Service Centre</div>
               </div>
               <div className="flex items-center gap-1">

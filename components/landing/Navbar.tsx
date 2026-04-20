@@ -40,7 +40,7 @@ export default function Navbar() {
               <Wrench size={18} className="text-white" />
             </div>
             <span className="font-bold text-lg text-white">
-              Tech<span className="text-blue-400">Doc</span>
+              Repair<span className="text-blue-400">Master</span>
             </span>
           </div>
 

@@ -67,7 +67,7 @@ export default function Footer({ contacts }: { contacts: Contacts }) {
             <div className="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center">
               <Wrench size={14} className="text-white" />
             </div>
-            <span className="font-bold text-white">Tech<span className="text-blue-400">Doc</span></span>
+            <span className="font-bold text-white">Repair<span className="text-blue-400">Master</span></span>
           </div>
           <p className="text-sm text-slate-600">{fo.copyright}</p>
           <div />

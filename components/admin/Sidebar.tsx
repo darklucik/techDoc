@@ -35,7 +35,7 @@ export default function Sidebar() {
           </div>
           <div>
             <div className="font-bold text-white">
-              Tech<span className="text-blue-400">Doc</span>
+              Repair<span className="text-blue-400">Master</span>
             </div>
             <div className="text-xs text-slate-600">Панель управления</div>
           </div>

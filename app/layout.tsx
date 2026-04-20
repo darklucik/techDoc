@@ -6,7 +6,7 @@ import { LanguageProvider } from '@/components/LanguageContext';
 const inter = Inter({ subsets: ['latin', 'cyrillic'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
-  title: 'TechDoc — Uy texnikasini ta\'mirlash / Ремонт бытовой техники',
+  title: 'RepairMaster — Uy texnikasini ta\'mirlash / Ремонт бытовой техники',
   description: 'Professional ta\'mirlash xizmati. Профессиональный ремонт техники.',
 };
 
