@@ -1,63 +1,71 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { motion, useScroll } from 'framer-motion';
-import { Wrench, Menu, X, Phone } from 'lucide-react';
+import { motion, AnimatePresence, useScroll } from 'framer-motion';
+import { Wrench, Menu, X, Phone, Sun, Moon } from 'lucide-react';
 import { useLang } from '@/components/LanguageContext';
+import { useTheme } from '@/components/ThemeProvider';
+import { cn } from '@/lib/utils';
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
-  const { scrollYProgress } = useScroll();
-  const { lang, setLang, T } = useLang();
+  const [scrolled, setScrolled]   = useState(false);
+  const [open, setOpen]           = useState(false);
+  const { scrollYProgress }       = useScroll();
+  const { lang, setLang, T }      = useLang();
+  const { theme, toggle }         = useTheme();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll);
+    const onScroll = () => setScrolled(window.scrollY > 30);
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   const links = [
-    { href: '#services',    label: T.nav.services },
-    { href: '#how-it-works',label: T.nav.howItWorks },
-    { href: '#reviews',     label: T.nav.reviews },
-    { href: '#contact',     label: T.nav.contact },
+    { href: '#services',     label: T.nav.services },
+    { href: '#how-it-works', label: T.nav.howItWorks },
+    { href: '#reviews',      label: T.nav.reviews },
+    { href: '#contact',      label: T.nav.contact },
   ];
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={cn(
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         scrolled
-          ? 'bg-[#0A0E1A]/90 backdrop-blur-xl border-b border-white/8 shadow-xl shadow-black/20'
-          : 'bg-transparent'
-      }`}
+          ? 'glass shadow-lg dark:shadow-black/30 shadow-black/8 border-b border-[var(--border)]'
+          : 'bg-transparent border-b border-transparent',
+      )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-[68px]">
 
-          {/* Logo */}
-          <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center glow-blue">
-              <Wrench size={18} className="text-white" />
+          {/* ── Logo ── */}
+          <a href="/" className="flex items-center gap-2.5 group">
+            <div className="w-9 h-9 rounded-xl bg-[var(--teal)] flex items-center justify-center glow-teal transition-transform group-hover:scale-105">
+              <Wrench size={17} className="text-white" strokeWidth={2.5} />
             </div>
-            <span className="font-bold text-lg text-white">
-              Repair<span className="text-blue-400">Master</span>
+            <span className="font-bold text-lg text-[var(--text-primary)]">
+              Repair<span className="text-[var(--teal)]">Master</span>
             </span>
-          </div>
+          </a>
 
-          {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-8">
+          {/* ── Desktop nav ── */}
+          <nav className="hidden md:flex items-center gap-7">
             {links.map(l => (
-              <a key={l.href} href={l.href}
-                className="text-sm text-slate-400 hover:text-white transition-colors duration-200">
+              <a
+                key={l.href}
+                href={l.href}
+                className="relative text-sm font-medium text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors duration-200 group"
+              >
                 {l.label}
+                <span className="absolute -bottom-0.5 left-0 h-[1.5px] w-0 bg-[var(--teal)] rounded-full transition-all duration-200 group-hover:w-full" />
               </a>
             ))}
           </nav>
 
-          {/* Right side */}
-          <div className="hidden md:flex items-center gap-3">
+          {/* ── Right controls ── */}
+          <div className="hidden md:flex items-center gap-2.5">
             {/* Language switcher */}
-            <div className="flex items-center gap-0.5 p-1 rounded-xl bg-white/5 border border-white/10">
+            <div className="flex items-center gap-0.5 p-1 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border)]">
               {(['uz', 'ru'] as const).map(l => (
                 <button
                   key={l}
@@ -67,14 +75,14 @@ export default function Navbar() {
                   {lang === l && (
                     <motion.div
                       layoutId="lang-pill"
-                      className="absolute inset-0 rounded-lg bg-blue-600"
-                      style={{ boxShadow: '0 0 10px rgba(37,99,235,0.5)' }}
+                      className="absolute inset-0 rounded-lg bg-[var(--teal)]"
+                      style={{ boxShadow: '0 0 10px var(--teal-glow)' }}
                       transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                     />
                   )}
                   <span
                     className="relative z-10 transition-colors duration-150"
-                    style={{ color: lang === l ? '#fff' : 'rgb(148,163,184)' }}
+                    style={{ color: lang === l ? '#fff' : 'var(--text-dim)' }}
                   >
                     {l.toUpperCase()}
                   </span>
@@ -82,71 +90,132 @@ export default function Navbar() {
               ))}
             </div>
 
-            <a href={`tel:${T.nav.phone.replace(/\s/g, '')}`}
-              className="flex items-center gap-2 text-sm text-slate-300 hover:text-white transition-colors">
-              <Phone size={15} className="text-orange-400" />
+            {/* Theme toggle */}
+            <button
+              onClick={toggle}
+              aria-label="Toggle theme"
+              className={cn(
+                'w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200',
+                'border border-[var(--border)] bg-[var(--bg-secondary)]',
+                'hover:border-[var(--teal)] hover:text-[var(--teal)] text-[var(--text-muted)]',
+              )}
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  key={theme}
+                  initial={{ opacity: 0, rotate: -30, scale: 0.7 }}
+                  animate={{ opacity: 1, rotate: 0,   scale: 1   }}
+                  exit={{    opacity: 0, rotate:  30, scale: 0.7 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+                </motion.span>
+              </AnimatePresence>
+            </button>
+
+            {/* Phone */}
+            <a
+              href={`tel:${T.nav.phone.replace(/\s/g, '')}`}
+              className="flex items-center gap-1.5 text-sm font-medium text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors px-2"
+            >
+              <Phone size={14} className="text-[var(--amber)]" />
               {T.nav.phone}
             </a>
-            <a href="#contact"
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold rounded-xl transition-all duration-200 hover:-translate-y-0.5">
+
+            {/* CTA */}
+            <a
+              href="#contact"
+              className="px-4 py-2 bg-[var(--teal)] hover:bg-[var(--teal-light)] text-white text-sm font-semibold rounded-xl transition-all duration-200 hover:-translate-y-0.5 shadow-sm"
+            >
               {T.nav.cta}
             </a>
           </div>
 
-          {/* Mobile toggle */}
+          {/* ── Mobile controls ── */}
           <div className="md:hidden flex items-center gap-2">
-            {/* Mobile lang switcher */}
-            <div className="flex items-center gap-0.5 p-0.5 rounded-lg bg-white/5 border border-white/10">
+            {/* Mobile lang */}
+            <div className="flex items-center gap-0.5 p-0.5 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border)]">
               {(['uz', 'ru'] as const).map(l => (
                 <button key={l} onClick={() => setLang(l)}
                   className="relative px-2 py-0.5 rounded-md text-xs font-semibold w-8">
                   {lang === l && (
                     <motion.div
                       layoutId="lang-pill-mobile"
-                      className="absolute inset-0 rounded-md bg-blue-600"
+                      className="absolute inset-0 rounded-md bg-[var(--teal)]"
                       transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                     />
                   )}
                   <span
-                    className="relative z-10 transition-colors duration-150"
-                    style={{ color: lang === l ? '#fff' : 'rgb(100,116,139)' }}
+                    className="relative z-10"
+                    style={{ color: lang === l ? '#fff' : 'var(--text-dim)' }}
                   >
                     {l.toUpperCase()}
                   </span>
                 </button>
               ))}
             </div>
-            <button className="p-2 rounded-lg text-slate-400 hover:text-white"
-              onClick={() => setOpen(!open)}>
+
+            {/* Mobile theme toggle */}
+            <button
+              onClick={toggle}
+              className="p-2 rounded-lg border border-[var(--border)] text-[var(--text-muted)]"
+            >
+              {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
+
+            {/* Burger */}
+            <button
+              className="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-primary)]"
+              onClick={() => setOpen(!open)}
+            >
               {open ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Scroll progress line */}
+      {/* ── Scroll progress line ── */}
       <motion.div
-        className="absolute bottom-0 left-0 h-[2px] bg-blue-500 origin-left"
-        style={{ scaleX: scrollYProgress, transformOrigin: 'left' }}
+        className="absolute bottom-0 left-0 h-[2.5px] origin-left"
+        style={{
+          scaleX: scrollYProgress,
+          background: 'linear-gradient(90deg, var(--teal) 0%, #2DD4BF 40%, var(--amber) 75%, #FCD34D 100%)',
+          boxShadow: '0 0 8px var(--teal-glow), 0 0 16px rgba(13,148,136,0.3)',
+        }}
       />
 
-      {/* Mobile menu */}
-      {open && (
-        <div className="md:hidden bg-[#0A0E1A]/95 backdrop-blur-xl border-t border-white/8 px-4 py-4 space-y-3">
-          {links.map(l => (
-            <a key={l.href} href={l.href}
-              className="block text-slate-300 hover:text-white py-2 text-sm"
-              onClick={() => setOpen(false)}>
-              {l.label}
-            </a>
-          ))}
-          <a href="#contact"
-            className="block text-center px-4 py-2.5 bg-blue-600 text-white text-sm font-semibold rounded-xl mt-2"
-            onClick={() => setOpen(false)}>
-            {T.nav.cta}
-          </a>
-        </div>
-      )}
+      {/* ── Mobile menu ── */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{    opacity: 0, y: -8 }}
+            transition={{ duration: 0.18 }}
+            className="md:hidden border-t border-[var(--border)] bg-[var(--bg-primary)]/95 backdrop-blur-xl px-4 py-4 space-y-1"
+          >
+            {links.map(l => (
+              <a
+                key={l.href}
+                href={l.href}
+                className="block text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] py-2.5 px-3 rounded-xl text-sm font-medium transition-colors"
+                onClick={() => setOpen(false)}
+              >
+                {l.label}
+              </a>
+            ))}
+            <div className="pt-2">
+              <a
+                href="#contact"
+                className="block text-center px-4 py-2.5 bg-[var(--teal)] text-white text-sm font-semibold rounded-xl"
+                onClick={() => setOpen(false)}
+              >
+                {T.nav.cta}
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
